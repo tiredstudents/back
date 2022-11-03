@@ -90,19 +90,15 @@ ActiveRecord::Schema.define(version: 20_221_102_201_511) do
 
   create_table 'users', force: :cascade do |t|
     t.string 'email', null: false
-    t.string 'encrypted_password', null: false
+    t.string 'crypted_password', null: false
+    t.string 'salt'
     t.string 'first_name', null: false
     t.string 'last_name', null: false
     t.string 'phone', null: false
     t.string 'post', null: false
-    t.boolean 'is_resource'
-    t.string 'reset_password_token'
-    t.datetime 'reset_password_sent_at'
-    t.datetime 'remember_created_at'
+    t.boolean 'is_resource', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
-    t.index ['email'], name: 'index_users_on_email', unique: true
-    t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
 
   create_table 'vacancies', force: :cascade do |t|
