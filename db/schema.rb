@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_221_102_201_511) do
+ActiveRecord::Schema.define(version: 20_221_103_213_551) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20_221_102_201_511) do
     t.bigint 'manager_id'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
+    t.integer 'price'
     t.index ['manager_id'], name: 'index_projects_on_manager_id'
     t.index ['owner_id'], name: 'index_projects_on_owner_id'
   end
@@ -96,9 +97,12 @@ ActiveRecord::Schema.define(version: 20_221_102_201_511) do
     t.string 'last_name', null: false
     t.string 'phone', null: false
     t.string 'post', null: false
+    t.string 'api_token'
     t.boolean 'is_resource', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
+    t.bigint 'manager_id'
+    t.index ['manager_id'], name: 'index_users_on_manager_id'
   end
 
   create_table 'vacancies', force: :cascade do |t|
@@ -131,6 +135,7 @@ ActiveRecord::Schema.define(version: 20_221_102_201_511) do
   add_foreign_key 'project_resources', 'vacancies'
   add_foreign_key 'projects', 'users', column: 'manager_id'
   add_foreign_key 'projects', 'users', column: 'owner_id'
+  add_foreign_key 'users', 'users', column: 'manager_id'
   add_foreign_key 'vacancies', 'projects'
   add_foreign_key 'vacancy_hrs', 'users', column: 'hr_id'
   add_foreign_key 'vacancy_hrs', 'vacancies'

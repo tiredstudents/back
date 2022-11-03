@@ -5,7 +5,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/auth', to: 'session#create'
 
-      resources :projects
+      resources :users
+      resources :projects do
+        resources :vacancies
+      end
     end
   end
 end

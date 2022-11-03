@@ -1,13 +1,24 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  extend Enumerize
   attr_accessor :password
+
+  POSTS = ['project owner', 'project manager', 'hr', 'manager', 'employee', 'support'].freeze
 
   validates :email, presence: true, uniqueness: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, :first_name, :last_name, :phone, :post, :is_resource, presence: true
+  validates :password, presence: true, on: :create
+  validates :first_name, :last_name, :phone, :post, :is_resource, presence: true
+  enumerize :post, in: POSTS
 
-  before_save :crypt_password
+  before_create :crypt_password
+
+  belongs_to :manager, class_name: 'User', foreign_key: 'manager_id', optional: true
+  has_many :slaves, class_name: 'User', foreign_key: 'manager_id', dependent: :nullify
+  has_many :owned_projects, class_name: 'Project', foreign_key: 'owner_id', dependent: :nullify
+  has_many :managed_projects, class_name: 'Project', foreign_key: 'manager_id', dependent: :nullify
+  has_many :managed_vacancies, class_name: 'HrVacancy', foreign_key: 'hr_id', dependent: :nullify
 
   def self.authenticate(email, password)
     u = find_by(email: email)
