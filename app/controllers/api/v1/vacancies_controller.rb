@@ -3,6 +3,8 @@
 module Api
   module V1
     class VacanciesController < Api::V1::BaseController
+      load_and_authorize_resource class: 'Vacancy'
+
       before_action :find_vacancy, only: %i[show update candidates close complete assign_for_hr unassign]
       before_action :find_project, only: %i[index create]
       before_action :find_resource, only: %i[complete]

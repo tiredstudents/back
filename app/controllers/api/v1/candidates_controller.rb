@@ -3,6 +3,8 @@
 module Api
   module V1
     class CandidatesController < Api::V1::BaseController
+      load_and_authorize_resource class: 'Candidate'
+
       before_action :find_vacancy, only: %i[index create]
       before_action :find_candidate, only: %i[show update destroy vacancies]
 
