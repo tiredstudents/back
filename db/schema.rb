@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_221_103_213_551) do
+ActiveRecord::Schema.define(version: 20_221_104_151_616) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -81,6 +81,10 @@ ActiveRecord::Schema.define(version: 20_221_103_213_551) do
     t.integer 'level', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
+    t.bigint 'resource_id'
+    t.bigint 'skill_id'
+    t.index ['resource_id'], name: 'index_skill_resources_on_resource_id'
+    t.index ['skill_id'], name: 'index_skill_resources_on_skill_id'
   end
 
   create_table 'skills', force: :cascade do |t|
@@ -102,6 +106,7 @@ ActiveRecord::Schema.define(version: 20_221_103_213_551) do
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.bigint 'manager_id'
+    t.boolean 'is_active'
     t.index ['manager_id'], name: 'index_users_on_manager_id'
   end
 
@@ -135,6 +140,8 @@ ActiveRecord::Schema.define(version: 20_221_103_213_551) do
   add_foreign_key 'project_resources', 'vacancies'
   add_foreign_key 'projects', 'users', column: 'manager_id'
   add_foreign_key 'projects', 'users', column: 'owner_id'
+  add_foreign_key 'skill_resources', 'skills'
+  add_foreign_key 'skill_resources', 'users', column: 'resource_id'
   add_foreign_key 'users', 'users', column: 'manager_id'
   add_foreign_key 'vacancies', 'projects'
   add_foreign_key 'vacancy_hrs', 'users', column: 'hr_id'

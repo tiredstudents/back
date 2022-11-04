@@ -9,4 +9,7 @@ class ResourceSkill < ApplicationRecord
 
   validates :level, presence: true
   enumerize :level, in: LEVELS
+
+  belongs_to :resource, class_name: 'User', foreign_key: 'resource_id'
+  belongs_to :skill, class_name: 'Skill', foreign_key: 'skill_id'
 end

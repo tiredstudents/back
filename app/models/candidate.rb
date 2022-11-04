@@ -3,5 +3,6 @@
 class Candidate < ApplicationRecord
   validates :first_name, :last_name, presence: true
 
-  has_many :vacancies, class_name: 'CandidateVacancy', foreign_key: 'candidate_id'
+  has_many :candidate_vacancies, class_name: 'CandidateVacancy', foreign_key: 'candidate_id', dependent: :destroy
+  has_many :vacancies, through: :candidate_vacancies
 end
