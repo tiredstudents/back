@@ -3,6 +3,8 @@
 module Api
   module V1
     class GradesController < Api::V1::BaseController
+      load_and_authorize_resource class: 'Grade'
+
       def all
         user = User.find(params[:resource_id])
         names = user.grades.joins(:grade).select('grade_resources.*, grades.*').pluck(:specialization)

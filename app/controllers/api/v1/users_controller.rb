@@ -3,6 +3,8 @@
 module Api
   module V1
     class UsersController < Api::V1::BaseController
+      load_and_authorize_resource class: 'User'
+
       before_action :find_user, only: %i[show update fire vacancies projects
                                          owned_projects managed_projects
                                          managed_vacancies]

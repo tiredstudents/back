@@ -3,6 +3,8 @@
 module Api
   module V1
     class SkillsController < Api::V1::BaseController
+      load_and_authorize_resource class: 'Skill'
+
       def all
         user = User.find(params[:resource_id])
         names = user.skills.joins(:skill).select('skill_resources.*, skills.*').pluck(:name)

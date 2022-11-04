@@ -3,6 +3,8 @@
 module Api
   module V1
     class ProjectsController < Api::V1::BaseController
+      load_and_authorize_resource class: 'Project'
+
       before_action :find_project, only: %i[show update finish free_resource resources]
       before_action :find_resource, only: %i[free_resource]
 
