@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class JsonWebToken
-  SECRET_KEY = ENV['SECRET_KEY']
+  SECRET_KEY = 'very_secret'
 
   def self.encode(payload)
     payload[:expires_at] = 24.hours.from_now.to_i
