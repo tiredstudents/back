@@ -62,7 +62,7 @@ class Ability
     can :all, Skill
     can :create, Skill
     can :index, User
-    сan :show, User
+    can :show, User
     can :projects, User
     can :managed_vacancies, User
     can :create, User
@@ -88,12 +88,15 @@ class Ability
     can :all, Skill
     can :create, Skill
     can :managed_projects, User
+    can :show, User
+    can :projects, User
     can :index, Vacancy
     can :show, Vacancy
     can :complete, Vacancy
   end
 
   def employee_abilities
+    can :show, User
     can :projects, User
     can :all, Grade
     can :all, Skill

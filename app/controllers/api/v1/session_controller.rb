@@ -13,7 +13,7 @@ module Api
 
         token = JsonWebToken.encode(user_id: user.id)
 
-        render json: { api_token: token, expires_at: 24.hours.from_now }, status: :created
+        render json: { api_token: token, expires_at: 24.hours.from_now, user: user }, status: :created
       end
 
       private
