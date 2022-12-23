@@ -1,4 +1,5 @@
 FROM ruby:2.5.8-alpine
+RUN sed -i 's/DEFAULT@SECLEVEL=2/DEFAULT@SECLEVEL=1/' /etc/ssl/openssl.cnf
 
 ENV APP_PATH /myapp
 ENV BUNDLE_VERSION 2.3.22
