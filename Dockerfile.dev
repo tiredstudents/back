@@ -37,9 +37,6 @@ COPY Gemfile* ./
 COPY . ./
 RUN bundle install
 
-# navigate to app directory
-WORKDIR $APP_PATH
-
 EXPOSE $RAILS_PORT
 
 # ENTRYPOINT [ "bundle", "exec" ]

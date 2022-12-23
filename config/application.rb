@@ -14,6 +14,7 @@ module Back
     config.load_defaults 6.1
 
     load(File.join(Rails.root, '.env'))
+    config.hosts << "www.example.com"
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

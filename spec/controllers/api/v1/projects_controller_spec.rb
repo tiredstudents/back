@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe Api::V1::ProjectsController, type: :request do
   let(:user) { FactoryBot.create :user, post: post }
+  let(:post) { 'support' }
   before do
     allow(JsonWebToken).to receive(:decode).and_return({ 'user_id' => user.id, 'expires_at' => Time.zone.now + 1.day })
   end
@@ -100,6 +101,12 @@ describe Api::V1::ProjectsController, type: :request do
       it 'returns error' do
         expect(response.parsed_body).to eq access_error
       end
+    end
+  end
+
+  describe 'failed test' do
+    it 'fails' do
+      expect(2).to eq 1  
     end
   end
 end
